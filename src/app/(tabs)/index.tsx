@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import api from "../service/api";
+import { Card } from "../components/card";
 
 
 type PokemonType={
@@ -82,7 +83,9 @@ export default function Index() {
         />
       </View>
       <View style={styles.content}>
-        {pokemons.map(item => <Text style={styles.pokemonName} >{item.name}</Text>)}
+        {pokemons.map(item => 
+          <Card/>
+        )}
       </View>
       <View style={styles.footer}>
         <Pressable style={styles.bottonFooter}>
@@ -149,9 +152,5 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: "#f76a6aff",
   },
-  pokemonName: {
-    borderRadius: 5,
-    boxShadow: '2%',
-    backgroundColor: "f76a6aff"
-  },
+
 });
