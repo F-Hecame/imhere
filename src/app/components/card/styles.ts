@@ -1,7 +1,6 @@
 import styled, {css} from 'styled-components/native';
 import themes from '../../global/styles/themes';
 
-
 type PokemonType = {
   type: string
 }
@@ -30,6 +29,13 @@ export const pokemonId = styled.Text`
   line-height: 14px;
   color: ${themes.colors.light_text};
   `} 
+`
+export const ImageCardDetailsLeftSide = styled.Image`
+  position: absolute;
+  width: 70px;
+  height: 32px;
+  left: 90;
+  top: -10;
 `
 
 export const pokemonName = styled.Text`
@@ -68,3 +74,17 @@ export const PokemonTypeText = styled.Text`
   text-transform: capitalize;
   `} 
 `
+
+export const RightSide = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  position: relative;
+
+`
+
+export const PokemonImage = styled.Image` 
+  margin-top: -40px;
+  width: 130px;
+  height: 130px;
+` 

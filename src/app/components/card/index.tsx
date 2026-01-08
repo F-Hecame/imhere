@@ -1,21 +1,52 @@
 import React from "react";
 import * as S from "./styles";
+import dotsImage from '../../assets/dots.png';
+import { TouchableOpacityProps } from "react-native";
 
-export function Card() {
+
+export type PokemonType = {
+  type: {
+    name: string;
+  }   
+}
+
+export type Pokemon = {
+    name: string;
+    url: string;
+    id: number;
+    types: PokemonType[];
+  } 
+    
+
+type Props = {
+  data: Pokemon,
+  } & TouchableOpacityProps
+
+
+
+export function Card({data, ...rest} : Props) { 
   return (
-    <S.PokemonCard type= "grass">
+    <S.PokemonCard type= {data.types[0].type.name} {...rest}>
       <S.leftSide>
-        <S.pokemonId></S.pokemonId>
-        <S.pokemonName></S.pokemonName>
-        {/* <S.ImageCardDetailsLeftSide source={} /> */}
+        <S.pokemonId>#{data.id}</S.pokemonId>
+        <S.pokemonName>{data.name}</S.pokemonName>
+        <S.ImageCardDetailsLeftSide source={dotsImage} />
 
         <S.PokemonContentType>
-          <S.PokemonType type= "fire">
-            <S.PokemonTypeText></S.PokemonTypeText>
-          </S.PokemonType>
+          {data.types.map(pokemonType => <S.PokemonType key={pokemonType.type.name} type={pokemonType.type.name}>
+            <S.PokemonTypeText key={pokemonType.type.name}>
+              {pokemonType.type.name}
+            </S.PokemonTypeText>
+          </S.PokemonType>)}
         </S.PokemonContentType>
       </S.leftSide>
-      {/* <S.RightSide></S.RightSide> */}
+      <S.RightSide>
+        <S.PokemonImage
+          source={{
+            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`
+          }}
+        />
+      </S.RightSide>
     </S.PokemonCard>
   );
 }

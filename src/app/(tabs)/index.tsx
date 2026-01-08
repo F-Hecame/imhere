@@ -1,6 +1,7 @@
 import { GearIcon, MagnifyingGlassIcon } from "phosphor-react-native";
 import React, { useEffect, useState } from "react";
 import {
+  FlatList,
   Pressable,
   StyleSheet,
   Text,
@@ -9,19 +10,19 @@ import {
   View,
 } from "react-native";
 import api from "../service/api";
-import { Card } from "../components/card";
+import { Card, Pokemon, PokemonType } from "../components/card";
 
 
-type PokemonType={
-  type: string
-}
+// type PokemonType={
+//   type: string
+// }
 
-type Pokemon={
-  name: string
-  url: string
-  id: number
-  types: PokemonType[]
-}
+// type Pokemon={
+//   name: string
+//   url: string
+//   id: number
+//   types: PokemonType[]
+// }
 
 type Request = {
   id: number
@@ -83,15 +84,15 @@ export default function Index() {
         />
       </View>
       <View style={styles.content}>
-        {pokemons.map(item => 
-          <Card/>
-        )}
+        <FlatList 
+          data={pokemons}
+          keyExtractor={pokemon => pokemon.id.toString()}
+          renderItem={({item : pokemon}) =>
+          
+          <Card data={pokemon} />}
+        />
       </View>
-      <View style={styles.footer}>
-        <Pressable style={styles.bottonFooter}>
-          <Text>Pesquisar Pokémon</Text>
-        </Pressable>
-      </View>
+     
     </View>
   );
 }
@@ -100,6 +101,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f76a6aff",
+   
   },
   header: {
     justifyContent: "space-between",
@@ -136,6 +138,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     borderRadius: 4,
+    padding: 20,
   },
   footer: {
     borderWidth: 1,
